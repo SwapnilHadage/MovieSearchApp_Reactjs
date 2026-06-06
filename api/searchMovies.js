@@ -12,7 +12,7 @@ export default async function handler(req, res){
   if(!query){
     return res.status(405).json({
       success:false,
-      message:"Empty Search Parameter",
+      message:"Empty Search Parameter",g
     })
   }
   try{
@@ -30,4 +30,3 @@ export default async function handler(req, res){
   }
 }
 
-export default handler;

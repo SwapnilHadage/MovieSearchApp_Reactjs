@@ -1,7 +1,7 @@
-import axios from "axios";
+import axios from 'axios';
 
 const searchMovieByName = async(movieName)=>{
-  const rez = await axios.get('api/searchMovies',{ params: {
+  const res = await axios.get('api/searchMovies',{ params: {
         query:movieName,
       }});
   console.log(res.data);
@@ -9,3 +9,6 @@ const searchMovieByName = async(movieName)=>{
   return res.data;
 }
 
+export { searchMovieByName,
+
+  };
