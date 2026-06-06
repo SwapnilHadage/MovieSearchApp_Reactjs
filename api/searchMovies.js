@@ -10,15 +10,19 @@ export default async function handler(req, res){
 
   const {query, } = req.query;
   if(!query){
-    return res.status(405).json({
+    return res.status(400).json({
       success:false,
-      message:"Empty Search Parameter",g
+      message:"Empty Search Parameter",
     })
   }
   try{
 
     const response = await tmdb.get(
-      "/search/movie");
+      "/search/movie",{
+        params:{
+          query,
+        }
+      });
 
       return res.status(200).json(response.data);
   }catch(error){
