@@ -1,14 +1,15 @@
 import {useState} from 'react'
 import { FiSearch, ImCancelCircle } from '../assets/react-icons/icons';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { fetchMoviesByName } from '../redux/slices/movieSearchSlice';
 
 function Search() {
-
+  const dispatch = useDispatch();
   const [movie, setMovie] = useState('');
   const [isTyping, setIsTyping] = useState(false);
   const { theme, } = useSelector(state=>state.movieSearch)
   function searchMovies(){
-    //api call
+    dispatch(fetchMoviesByName(movie));
     console.log('searched');
     
   }
