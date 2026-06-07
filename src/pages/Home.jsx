@@ -45,7 +45,7 @@ function Home() {
 
         `}>
         {
-          fetchedData.array.map((element) => (
+          fetchedData?.results?.map((element) => (
             <MiniCard
               key={element.id}
               data={element}
