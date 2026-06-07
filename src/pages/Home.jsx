@@ -45,9 +45,8 @@ function Home() {
 
         `}>
         {
-          fetchedData.map((el)=>{
-            <MiniCard
-            data={el}/>
+          fetchedData.array.forEach(element => {
+            <MiniCard data={element}/>
           })
         }
       </div>
