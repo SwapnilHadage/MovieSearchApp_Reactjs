@@ -1,25 +1,35 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { searchMovieByName } from "../../services/searchMovieByName";
 
-export const fetchMoviesByName = createAsyncThunk("movie/search",
+export const fetchMoviesByName = createAsyncThunk(
+  "movie/search",
   async(searchVal, thunkAPI)=>{
     try{
       const res = await searchMovieByName(searchVal);
       return res;
     }catch (error){
       return thunkAPI.rejectWithValue({
-        message : error.message
+        message : error?.message || error?.response?.data?.message || "Something Went Wrong",
+        code: error?.code || null,
+        status: error?.response?.status || null,
+        statusText: error?.response?.statusText || null,
       });
     }
   }
-  );
+);
 
 const movieSearch = createSlice({
   name: 'movieSearch',
   initialState: {
     movieId: null,
     fetchedData: null,
-    favourites: null,
+    favourites: (()=>{
+                        try {
+                          return JSON.parse(localStorage.getItem('favourites')) || {};
+                        } catch (error) {
+                          return {};
+                        }
+                })(),
     loading: null,
     error: null,
     theme: 1, //dark
@@ -28,8 +38,14 @@ const movieSearch = createSlice({
   reducers: {
     toggleTheme: (state)=>{
       state.theme = !state.theme;
-    }
+    },
+    changeFavs: (state, action)=>{
+      state.favourites = action.payload;
+      localStorage.setItem('favourites', JSON.stringify(action.payload));
+    },
+
   },
+
   extraReducers: (builder)=>{
     builder
     //movies by name
@@ -61,6 +77,7 @@ const movieSearch = createSlice({
 export const
 {
   toggleTheme,
+  changeFavs,
 
 } = movieSearch.actions;
 

@@ -1,4 +1,3 @@
-import {useState} from 'react';
 import {Search, } from './index'
 import { useSelector, useDispatch } from 'react-redux';
 import {RiMenu3Fill, } from '../assets/react-icons/icons';
@@ -13,24 +12,33 @@ function Header() {
   }
 
   return (
-    <div
-    className={`w-full h-13 p-2 flex justify-evenly items-center
-      ${theme? ' bg-slate-900 ' : ' bg-slate-100 ' }`}>
-      <Search/>
+    <header
+    className={`relative p-2 flex-none flex justify-evenly items-center
+      ${theme
+          ? "border-slate-800 bg-slate-900 text-white"
+          : "border-slate-200 bg-slate-100 text-slate-900"}`}>
+      <div className="mx-auto flex min-h-16 w-full max-w-7xl items-center gap-4 px-4 py-3 md:justify-evenly ">
+        <Search/>
 
-      <button
-      onClick={handleToggleTheme}>
-        {"D<->L"}
-      </button>
+          <button
+          type="button"
+          aria-label="Change Theme"
+          className="shrink-0"
+          onClick={handleToggleTheme}>
+            {"D<->L"}
+          </button>
 
-      <button
-      className='absolute top-4 right-4 text-white
-      md:hidden
-      '>
-        <RiMenu3Fill/>
-      </button>
-      
-    </div>
+          <button
+          type="button"
+          aria-label="Open navigation menu"
+          className='shrink-0 ml-auto
+          md:hidden
+          '>
+            <RiMenu3Fill/>
+          </button>
+          </div>
+          
+    </header>
   )
 }
 
