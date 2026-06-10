@@ -9,7 +9,7 @@ function Search() {
   const [isTyping, setIsTyping] = useState(false);
   const { theme, } = useSelector(state=>state.movieSearch)
   function searchMovies(){
-    dispatch(fetchMoviesByName(movie));
+    dispatch(fetchMoviesByName(movie.trim()));
     console.log('searched');
     
   }
@@ -24,7 +24,7 @@ function Search() {
       ${theme?' text-slate-100 bg-slate-800 placeholder:text-slate-500 focus:bg-slate-600  ':'  text-slate-900 bg-white placeholder:text-slate-400 focus:bg-slate-300'}
       `}
       onChange={(e)=>{
-        setMovie(e.target.value.trim());
+        setMovie(e.target.value);
         setIsTyping(false);
       }}
       onKeyDown={(e)=>{
