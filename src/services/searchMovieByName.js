@@ -6,7 +6,7 @@ const searchMovieByName = async(movieName='batman')=>{
       }});
 
   console.log(res.data);
-  return res.data;
+  return res?.data?.results;
 }
 
 export { searchMovieByName,
